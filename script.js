@@ -24,8 +24,11 @@ class Pagination {
     controlBtns[0].addEventListener('click', () => {
       let pageIndex;
       if (this.pages[0].index === 0) {
-        pageIndex =
-          this.getNumberOfPages() - (this.getNumberOfPages() % this.scopeLimit);
+        let remainder = this.getNumberOfPages() % this.scopeLimit;
+        if (remainder === 0) {
+          remainder = 1;
+        }
+        pageIndex = this.getNumberOfPages() - remainder;
       } else {
         pageIndex = this.pages[0].index - this.scopeLimit;
       }
@@ -156,4 +159,4 @@ const loader = document.getElementById('loader');
 
 const root = document.getElementById('pagination');
 
-const pagination = new Pagination(root, 5, 5);
+const pagination = new Pagination(root, 3, 5);
